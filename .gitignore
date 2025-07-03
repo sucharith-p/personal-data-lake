@@ -1,0 +1,16 @@
+# Byte-compiled / virtual environment
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+*.duckdb
+*.log
+*.env
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
