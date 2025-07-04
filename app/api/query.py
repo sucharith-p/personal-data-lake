@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Body
 from pydantic import BaseModel
-from app.services.sql_runner import run_query_on_dataset
+from app.services.lake_query_engine import run_query_on_dataset
 
 router = APIRouter()
 
