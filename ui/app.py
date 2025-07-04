@@ -20,7 +20,7 @@ def get_mime_type(fmt):
         "JSON": "application/json"
     }[fmt]
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://lake-backend:8000"
 
 # --- Page Config ---
 st.set_page_config(
@@ -79,15 +79,13 @@ except Exception as e:
     st.error("Failed to load datasets.")
     datasets = []
 with flush_col:
-    if st.button("Flush Metadata", help="Remove metadata entries for missing files"):
+    if st.button("🔄 Refresh", help="Reload dataset list from S3 and metadata DB", use_container_width=True):
         response = requests.delete(f"{BASE_URL}/datasets/cleanup")
         if response.status_code == 200:
             result = response.json()
             print(f"[Flush Metadata] Deleted {result['deleted_count']} entries: {result['deleted_datasets']}")
         else:
             print("⚠️ Flush failed:", response.text)
-
-    if st.button("🔄 Refresh List", help="Reload dataset list from S3 and metadata DB", use_container_width=True):
         st.rerun()
 
 with table_col:           
