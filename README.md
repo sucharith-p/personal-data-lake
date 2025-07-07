@@ -103,7 +103,10 @@ personal-data-lake/
 - Integration with Superset or Grafana for visual exploration
 
 ## 🧾 License
-MIT License © 2025 [Sucharith P]
+MIT License
+
+Copyright (c) 2025 Sucharith
+
 
 ## 🤝 Contributing
 If you’d like to contribute, fork the repo and submit a PR!
