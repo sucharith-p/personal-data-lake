@@ -40,8 +40,9 @@ Create a .env file in the root directory with the following content:
 ```env
 AWS_ACCESS_KEY_ID=your-access-key
 AWS_SECRET_ACCESS_KEY=your-secret-key
-AWS_REGION=us-east-1
+AWS_REGION=your-s3-bucket-region
 S3_BUCKET_NAME=your-s3-bucket-name
+DB_URL=postgresql://postgres:postgres@localhost:5432/data_lake
 ```
 
 ### 3. Build and Start the Containers
@@ -53,7 +54,7 @@ This launches:
 -	🧊 Streamlit frontend at http://localhost:8501
 
 ## 🖥️ Project Structure
-
+```text
 personal-data-lake/
 │
 ├── backend/                # FastAPI backend
@@ -69,12 +70,13 @@ personal-data-lake/
 ├── .env                    # AWS credentials (not committed)
 ├── docker-compose.yml      # Docker orchestration
 └── README.md
+```
 
 ## 🧪 How It Works
 
 1.	Visit http://localhost:8501
 2.	Land on the Demo Mode homepage with sample data
-3.	Click “Connect to Your S3” and input AWS credentials
+3.	Click Upload to upload files to your S3 bucket (You must have your bucket configured in the .env file)
 4.	View and interact with your own S3 data securely
 5.	Upload files, run SQL queries, and download/export results
 
