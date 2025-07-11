@@ -1,7 +1,18 @@
+
 import streamlit as st
 import pandas as pd
 import requests
 import io
+
+hide_streamlit_style = """
+    <style>
+    [data-testid="collapsedControl"] {
+        display: none !important;
+    }
+    </style>
+"""
+import streamlit as st
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
 def convert_df(df, fmt):
     if fmt == "CSV":
@@ -24,10 +35,11 @@ BASE_URL = "http://lake-backend:8000"
 
 # --- Page Config ---
 st.set_page_config(
-    page_title="Personal Data Lake",
-    page_icon="🧊",
+    page_title="Lakehaus",
+    page_icon="⛰️",
     layout="wide",
-    initial_sidebar_state="auto"
+    initial_sidebar_state="collapsed",
+    menu_items=None
 )
 
 # --- Session state ---
@@ -35,13 +47,13 @@ if "uploaded" not in st.session_state:
     st.session_state.uploaded = False
 
 # --- App Title ---
-st.markdown("## 🧊 Personal Data Lake-as-a-Service")
-st.markdown("Lightweight backend to store, manage, and query structured data files.")
+st.markdown("## Lakehaus")
+st.markdown("Lightweight data lake as a service to store, manage, and query structured data files.")
 
 st.markdown("---")
 
 # === Upload Section ===
-st.markdown("### 📤 Upload a File")
+st.markdown("### Upload")
 st.caption("Choose a CSV, JSON, or Parquet file (limit: 200MB)")
 
 upload_col1, upload_col2 = st.columns([6, 1])
@@ -54,7 +66,7 @@ with upload_col1:
 with upload_col2:
     st.write("")  # Spacer
     st.write("")  # Spacer
-    upload_clicked = st.button("Upload File", use_container_width=False)
+    upload_clicked = st.button(" 📤 Upload", use_container_width=False)
 
 if uploaded_file and upload_clicked:
     files = {"file": (uploaded_file.name, uploaded_file.getvalue())}
@@ -68,7 +80,7 @@ if uploaded_file and upload_clicked:
 st.markdown("---")
 
 # === Dataset Listing Section ===
-st.markdown("### 📁 Uploaded Datasets")
+st.markdown("### Data")
 flush_col, table_col = st.columns([1, 9])
 
 try:
@@ -87,6 +99,9 @@ with flush_col:
         else:
             print("⚠️ Flush failed:", response.text)
         st.rerun()
+    
+    if st.button("💬 Lakechat", use_container_width=True):
+        st.switch_page("pages/chat.py")
 
 with table_col:           
     if datasets:
@@ -100,13 +115,13 @@ with table_col:
 st.markdown("---")
 
 # === Query Section ===
-st.markdown("### 🔍 Run a SQL Query")
+st.markdown("### Query")
 st.caption("💡 Use table names based on uploaded file names (e.g., `Iris`, `demo`)")
 
 sql = st.text_area("Enter SQL", value="", height=200)
 
 # --- Run Query ---
-if st.button("Run Query"):
+if st.button("▶️ Run"):
     payload = {"sql": sql}
     response = requests.post(f"{BASE_URL}/query", json=payload)
 

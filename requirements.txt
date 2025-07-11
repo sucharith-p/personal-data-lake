@@ -6,5 +6,8 @@ sqlalchemy
 psycopg2-binary
 python-dotenv
 duckdb
-streamlit
+streamlit>=1.25.0
 python-multipart
+openai
+sentence-transformers
+pgvector

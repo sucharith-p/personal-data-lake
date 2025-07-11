@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File
 from app.services.file_parser import parse_and_infer
 from app.services.lake_ingestor import store_file_and_metadata
+from app.services.embeddings_util import process_file_and_store_embeddings
 from sqlalchemy.orm import Session
 from fastapi import Depends
 from app.db.session import get_db
@@ -15,6 +16,7 @@ router = APIRouter()
 async def upload_dataset(file: UploadFile = File(...)):
     df, schema = await parse_and_infer(file)
     file_url = store_file_and_metadata(file.filename, df, schema)
+    process_file_and_store_embeddings(file.filename, df)
     return {"status": "success", "file_url": file_url}
 
 

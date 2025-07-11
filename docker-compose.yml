@@ -2,7 +2,9 @@ version: "3.9"
 
 services:
   db:
-    image: postgres:15
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
     container_name: postgres
     restart: always
     environment:
@@ -38,11 +40,14 @@ services:
       context: .
       dockerfile: Dockerfile.ui
     container_name: lake-frontend
-    command: streamlit run ui/app.py --server.port=8501 --server.address=0.0.0.0
+    command: streamlit run app.py --server.port=8501 --server.address=0.0.0.0
     ports:
       - "8501:8501"
+    working_dir: /app
     volumes:
-      - .:/code
+      - ./ui:/app 
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     depends_on:
       - backend
 
