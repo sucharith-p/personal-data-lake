@@ -41,7 +41,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
     menu_items=None
 )
-
+st.image("images/image.png", width=110)  # Adjust width as needed
 # --- Session state ---
 if "uploaded" not in st.session_state:
     st.session_state.uploaded = False

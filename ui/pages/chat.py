@@ -5,6 +5,7 @@ import numpy as np
 import time
 from sentence_transformers import SentenceTransformer
 
+st.image("images/image.png", width=110) 
 # Back button to main app page
 if st.button("⬅️ Back"):
     st.switch_page("app.py")
