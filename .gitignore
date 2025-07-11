@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+
+# Images or other large binaries (optional)
+*.png
