@@ -66,7 +66,7 @@ with upload_col1:
 with upload_col2:
     st.write("")  # Spacer
     st.write("")  # Spacer
-    upload_clicked = st.button(" 📤 Upload", use_container_width=False)
+    upload_clicked = st.button(" 📤   Upload", use_container_width=False)
 
 if uploaded_file and upload_clicked:
     files = {"file": (uploaded_file.name, uploaded_file.getvalue())}
@@ -91,7 +91,7 @@ except Exception as e:
     st.error("Failed to load datasets.")
     datasets = []
 with flush_col:
-    if st.button("🔄 Refresh", help="Reload dataset list from S3 and metadata DB", use_container_width=True):
+    if st.button("🔄  Refresh", help="Reload dataset list from S3 and metadata DB", use_container_width=True):
         response = requests.delete(f"{BASE_URL}/datasets/cleanup")
         if response.status_code == 200:
             result = response.json()
