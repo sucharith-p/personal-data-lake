@@ -10,7 +10,7 @@ async def lifespan(app: FastAPI):
     # Startup logic
     threading.Thread(target=sync_embeddings_from_s3, daemon=True).start()
     yield
-    # (Optional) Shutdown logic here
+
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(upload.router)

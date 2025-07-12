@@ -35,7 +35,7 @@ if user_input:
 
 # If there is a pending user input, process it and stream the assistant's response
 if st.session_state.get("pending_user_input"):
-    # Show "assistant is typing..." animation
+    # Show animation
     with st.chat_message("assistant"):
         placeholder = st.empty()
         # Animated "Thinking..." dots

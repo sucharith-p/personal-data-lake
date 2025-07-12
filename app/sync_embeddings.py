@@ -29,6 +29,17 @@ def load_dataframe(filepath):
             return pd.read_json(filepath)
         elif ext == ".parquet":
             return pd.read_parquet(filepath)
+        elif ext == ".txt":
+            with open(filepath, "r") as f:
+                text = f.read()
+            # Split text into lines or chunks as needed
+            return pd.DataFrame({"text": text.splitlines()})
+        elif ext == ".pdf":
+            import PyPDF2
+            with open(filepath, "rb") as f:
+                reader = PyPDF2.PdfReader(f)
+                text = "\n".join(page.extract_text() or "" for page in reader.pages)
+            return pd.DataFrame({"text": text.splitlines()})
         else:
             print(f"Skipping unsupported file type: {filepath}")
             return None

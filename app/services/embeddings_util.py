@@ -1,9 +1,8 @@
 from sentence_transformers import SentenceTransformer
 import psycopg2
-import pgvector
 import hashlib
 
-model = SentenceTransformer("all-MiniLM-L6-v2")  # or your choice
+model = SentenceTransformer("all-MiniLM-L6-v2") 
 
 def process_file_and_store_embeddings(filename, df):
     texts = df.astype(str).apply(lambda row: " | ".join(row), axis=1).tolist()
@@ -15,7 +14,7 @@ def process_file_and_store_embeddings(filename, df):
         password="postgres",
         host="db",
         port=5432
-    )  # Connect to your pgvector-enabled Postgres
+    )  
     cur = conn.cursor()
 
     for i, (text, emb) in enumerate(zip(texts, embeddings)):
